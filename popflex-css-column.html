@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css-column 瀑布流</title>
+    <style>
+        body {
+            margin: 4px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* 缺点：
+            排列顺序是从上到下 再从左至右
+            而在开发中 一般的排列顺序是从左至右 再从上至下
+        */
+
+        .masonry {
+            column-count: 4;
+            column-gap: 0;
+        }
+
+        .item {
+            padding: 2px;
+            position: relative;
+            counter-increment: item-counter;
+        }
+
+        .item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .item::after {
+            position: absolute;
+            display: block;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            background-color: #000;
+            color: #fff;
+            content: counter(item-counter);
+        }
+    </style>
+</head>
+<body>
+    <div class="masonry">
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=1" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=2" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=3" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=4" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=5" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=6" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=7" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=8" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=9" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=10" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=11" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=12" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=13" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=14" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=15" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=16" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=17" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=18" / >
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/360/460?random=19" / >
+        </div>
+
+    </div>
+</body>
+</html>
