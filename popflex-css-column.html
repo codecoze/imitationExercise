@@ -24,6 +24,8 @@
             padding: 2px;
             position: relative;
             counter-increment: item-counter;
+            /* 如果item位于两个列的交接处，就可能会被隔断 */
+            break-inside: avoid;
         }
 
         .item img {
