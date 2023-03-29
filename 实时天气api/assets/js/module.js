@@ -18,7 +18,7 @@ export const weekDayNames = [
 ];
 
 
-export const MonthName =[
+export const monthNames =[
     "Jan",
     "Feb",
     "Mar",
@@ -45,7 +45,7 @@ export const getDate = function(dateUnix,timezone){
 
     const weekDayName = weekDayNames[date.getUTCDay()];
 
-    const monthName = monthNames[DataTransfer.getUTCMonth()];
+    const monthName = monthNames[date.getUTCMonth()];
 
     return `${weekDayName} ${date.getUTCDate()}, ${monthName}`
 }
