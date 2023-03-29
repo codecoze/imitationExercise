@@ -597,7 +597,7 @@ article.container::before {
 }
 
 .badge.aqi-2 {
-  background-color: var(--bg-aq1i-2);
+  background-color: var(--bg-aqi-2);
   color: var(--on-bg-aqi-2)
 }
 
