@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上下活动的视窗效果</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            background-color: #f6f6f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 30px;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        h1::after {
+            content: "";
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, #f44336, #9f4db5);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .review-box {
+            width: 90%;
+            max-width: 700px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow:  -10px 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card {
+            height: 300px;
+            padding: 40px;
+            color: #111;
+            line-height: 22px;
+            box-sizing: border-box;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .profile img {
+            width: 70px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile h3 {
+            font-size: 26px;
+            color: #f44336;
+            margin-bottom: 8px;
+        }
+
+        #slide {
+            width: 100%;
+            padding-right: 60px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        .slidebar {
+            width: 60px;
+            height: 100%;
+            padding: 15px 0;
+            box-sizing: border-box;
+            background: #f44336;
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;            
+        }
+
+        .slidebar img {
+            width: 25px;
+            padding: 5px;
+            background-color: #FFF;
+            border-radius: 50%;
+            cursor: pointer;           
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>人物介绍</h1>
+        <div class="review-box">
+            <div id="slide">
+                <div class="card">
+                    <div class="profile">
+                        <img src="./images/pic1.jpg" alt="no1"/>
+                        <div>
+                            <h3>Phoenix</h3>
+                            <p>Web Designer</p>
+                        </div>
+                    </div>
+                    <p> 
+                        The designer sat at their desk, surrounded by sketches and color swatches. They carefully crafted each line and curve, choosing just the right hue to bring their vision to life. With a steady hand and a sharp eye, they transformed blank pages into beautiful works of art.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="profile">
+                      <img src="./images/pic2.jpg" />
+                      <div>
+                        <h3>Steve McCurry</h3>
+                        <p>UI/UX Designer</p>
+                      </div>
+                    </div>
+                    <p>
+                      The designer sat at their desk, surrounded by sketches and color
+                      swatches. They carefully crafted each line and curve, choosing
+                      just the right hue to bring their vision to life. With a steady
+                      hand and a sharp eye, they transformed blank pages into beautiful
+                      works of art.
+                    </p>
+                </div>
+                <div class="card">
+                <div class="profile">
+                    <img src="./images/pic3.jpg" />
+                    <div>
+                    <h3>Merlin Nauven</h3>
+                    <p>Web Designer</p>
+                    </div>
+                </div>
+                <p>
+                    The designer sat at their desk, surrounded by sketches and color
+                    swatches. They carefully crafted each line and curve, choosing
+                    just the right hue to bring their vision to life. With a steady
+                    hand and a sharp eye, they transformed blank pages into beautiful
+                    works of art.
+                </p>
+                </div>
+                <div class="card">
+                <div class="profile">
+                    <img src="./images/pic4.jpg" />
+                    <div>
+                    <h3>John Williams</h3>
+                    <p>Web Designer</p>
+                    </div>
+                </div>
+                <p>
+                    The designer sat at their desk, surrounded by sketches and color
+                    swatches. They carefully crafted each line and curve, choosing
+                    just the right hue to bring their vision to life. With a steady
+                    hand and a sharp eye, they transformed blank pages into beautiful
+                    works of art.
+                </p>
+                </div>
+            </div>
+            <div class="slidebar">
+                <img src="./images/up-arrow.png" alt="up" id="upBtn"/>
+                <img src="./images/down-arrow.png" alt="down" id="downBtn"/>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        let slide = document.getElementById("slide");
+        let upBtn = document.getElementById("upBtn");
+        let downBtn = document.getElementById("downBtn");
+
+
+        let x = 0;
+        upBtn.onclick = function() {
+           if(x<0){
+                x = x+300;
+                slide.style.top = x + "px";
+            
+            }
+        }
+
+        downBtn.onclick = function(){
+            if(x > -900){
+                x = x-300;
+                slide.style.top = x + "px";
+            }
+        }
+    </script>
+</body>
+</html>
