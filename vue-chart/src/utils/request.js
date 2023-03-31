@@ -11,7 +11,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(
     (config) =>{
-    
+        return config;
     },
     (error)=>{
         ElMessage('请求异常：' + JSON.stringify(error));
@@ -20,9 +20,9 @@ axios.interceptors.request.use(
 )
 
 axios.interceptors.response.use((response)=>{
-    if (typeof res.data !== 'object') {
+    if (typeof response.data !== 'object') {
         ElMessage.error('服务端异常！')
-        return Promise.reject(res)
+        return Promise.reject(response)
     }
     return response
 },
