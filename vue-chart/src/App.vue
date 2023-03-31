@@ -6,7 +6,7 @@ import home from './view/home.vue';
   <home></home>
 </template>
 
-<style scoped>
+<style >
 @import url(./assets/font/iconfont.css);
 .iconfont {
   font-family: "iconfont" !important;
@@ -27,5 +27,9 @@ import home from './view/home.vue';
   width: 100vw;
   height: 100vh;
   background-color: rgb(151,157,167);
+}
+
+ul,li {
+  list-style: none;
 }
 </style>
