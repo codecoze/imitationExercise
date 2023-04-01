@@ -105,6 +105,7 @@
 
 <script setup>
 import HeadPortrait from "@/components/HeadPortrait.vue";
+import FileCard from "@/components/FileCard.vue";
 import { defineProps,ref,toRefs,nextTick,onMounted,watch,defineEmits} from "vue"
 
 import { animation } from "@/utils/util";
@@ -218,7 +219,7 @@ function sendEmoji(msg){
  //发送信息
 function sendMsg(msgList){
     chatList.value.push(msgList);
-    console.log(chatList.value)
+    // console.log(chatList.value)
     scrollBottom();
 }
 
@@ -247,6 +248,61 @@ function sendImg(e){
    
     e.target.files=null;
 
+}
+
+//发送文件
+function sendFile(e) {
+    let chatMsg = {
+        ...userInfo,
+        msg: "",
+        chatType: 2, //信息类型，0文字，1图片,2 文件
+        extend: {
+            fileType: "", //(1word，2excel，3ppt，4pdf，5zpi, 6txt)
+        },
+    };
+    let files = e.target.files[0]; //图片文件名
+    chatMsg.msg = files;
+    if(files){
+        switch(files.type){
+            case "application/msword":
+          case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            chatMsg.extend.fileType = 1;
+            break;
+          case "application/vnd.ms-excel":
+          case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            chatMsg.extend.fileType = 2;
+            break;
+          case "application/vnd.ms-powerpoint":
+          case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+            chatMsg.extend.fileType = 3;
+            break;
+          case "application/pdf":
+            chatMsg.extend.fileType = 4;
+            break;
+          case "application/zip":
+          case "application/x-zip-compressed":
+            chatMsg.extend.fileType = 5;
+            break;
+          case "text/plain":
+            chatMsg.extend.fileType = 6;
+            break;
+          default:
+            chatMsg.extend.fileType = 0;
+        }
+        sendMsg(chatMsg);
+        e.target.files = null;
+    }
+
+}
+
+//发送视频
+function telephone(){
+    ElMessage("该功能还没有开发哦，敬请期待一下吧~🥳")
+}
+
+ //发送视频
+function  video() {
+    ElMessage("该功能还没有开发哦，敬请期待一下吧~🥳");
 }
 
 
