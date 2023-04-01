@@ -4,6 +4,8 @@
 项目参考来源来于B站UP主：大猫是小白<br/>
 视频地址： https://www.bilibili.com/video/BV1Gv4y1x7AA/?vd_source=b561b626bebd1da5c0d76a4e7f9ef6f8
 
+## 项目预览
+![这是图片](./public/demoView.jpg "项目截图")
 ## 项目初始化
 
 ```
