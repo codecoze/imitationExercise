@@ -116,6 +116,15 @@ const chatList = ref([]);
 const chatContent = ref(null);
 const emit = defineEmits(["personCardSort"]);
 const srcImgList = ref([]);
+const showEmoji = ref(false);
+let userInfo = {
+    headImg: new URL("@/assets/img/head_portrait.jpg",import.meta.url),
+    name: "大毛是小白",
+    time: "09：12 AM",
+    msg: "",
+    chatType: 0, //信息类型，0文字，1图片
+    uid: "1001", //uid
+}
 
 const props = defineProps({
     friendInfo : {
@@ -137,7 +146,6 @@ watch(
     friendInfo ,
     (newVal,oldVal)=>{
         console.log('watch监听inputVal的变化 newVal ------>', newVal);
-        console.log('watch监听inputVal的变化 oldVal ------>', oldVal);
         getFriendChatMsg();
     },
     { deep: true}
@@ -149,7 +157,7 @@ function getFriendChatMsg(){
         friendId: friendInfo.value.id,
     }
     getChatMsg(params).then(res=>{
-        console.log(res);
+        // console.log(res);
         chatList.value = res;
         chatList.value.forEach((item)=>{
             if(item.chatType == 2 && item.extend.imgType == 2){
@@ -161,16 +169,11 @@ function getFriendChatMsg(){
 
 }
 
-
 function sendText(){
     if(inputMsg.value){
         let chatMsg = {
-            headImg: new URL("@/assets/img/head_portrait.jpg",import.meta.url),
-            name: "大毛是小白",
-            time: "09：12 AM",
+            ...userInfo,
             msg: inputMsg.value,
-            chatType: 0, //信息类型，0文字，1图片
-            uid: "1001", //uid
         }
         sendMsg(chatMsg);
         emit('personCardSort', friendInfo.value.id);
@@ -189,6 +192,26 @@ function scrollBottom(){
         let scrollDom = chatContent.value;
         animation(scrollDom, scrollDom.scrollHeight - scrollDom.offsetHeight)
     })
+}
+
+
+// 打开表情
+function clickEmoji(){
+    showEmoji.value = !showEmoji.value;
+}
+
+//发送表情
+function sendEmoji(msg){
+    let chatMsg = {
+        ...userInfo,
+        msg: msg,
+        chatType: 1, //信息类型，0文字，1图片
+        extend: {
+          imgType: 1, //(1表情，2本地图片)
+        },
+    }
+    sendMsg(chatMsg);
+    clickEmoji();
 }
 
  //发送信息
