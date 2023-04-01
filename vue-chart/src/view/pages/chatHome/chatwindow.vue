@@ -58,6 +58,7 @@
                                 v-if="item.extend.imgType == 1"
                                 style="width: 100px; height: 100px"
                             />
+                           
                             <el-image
                                 style="max-width: 300px; border-radius: 10px"
                                 :src="item.msg"
@@ -217,8 +218,37 @@ function sendEmoji(msg){
  //发送信息
 function sendMsg(msgList){
     chatList.value.push(msgList);
+    console.log(chatList.value)
     scrollBottom();
 }
+
+
+//发送本地图片
+function sendImg(e){
+    console.log(e.target.files)
+    let chatMsg = {
+        ...userInfo,
+        msg: "",
+        chatType: 1, //信息类型，0文字，1图片
+        extend: {
+          imgType: 2, //(1表情，2本地图片)
+        },
+    };
+
+    let files = e.target.files[0];//图片文件名
+    if(!e || !window.FileReader) return;  // 看是否支持
+    let reader =  new FileReader();
+    reader.readAsDataURL(files); //
+    reader.onload = function(){
+        chatMsg.msg = this.result;
+        srcImgList.value.push(chatMsg.msg);
+        sendMsg(chatMsg);
+    }
+   
+    e.target.files=null;
+
+}
+
 
 </script>
 
