@@ -1,7 +1,16 @@
-# Vue 3 + Vite
+# 模拟微信聊天界面前端项目
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+本项目基本框架是 Vite + Vue3;
+项目参考来源来于B站UP主：大猫是小白
+视频地址： https://www.bilibili.com/video/BV1Gv4y1x7AA/?vd_source=b561b626bebd1da5c0d76a4e7f9ef6f8
 
-## Recommended IDE Setup
+## 项目初始化
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+```
+    yarn init
+```
+
+## 项目运行
+```
+    yarn dev
+```
