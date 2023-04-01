@@ -18,7 +18,7 @@
         <div class="chatRight">
             <div v-if="showChatWindow">
                 <ChatWindow
-                :frinedInfo="chatWindowInfo"
+                :friendInfo="chatWindowInfo"
                 @personCardSort="personCardSort"
                 ></ChatWindow>
             </div>
@@ -40,7 +40,7 @@ import ChatWindow from "./chatwindow.vue";
 const  personList = ref([]);
 let  pcurrent = ref("");   
 let showChatWindow = ref(false);
-const chatWindowInfo  = reactive({})
+let chatWindowInfo  = reactive({})
 
 onMounted(()=>{
     fetchData();
@@ -54,16 +54,16 @@ function fetchData(){
     })
 };
 function clickPerson(info){
-
  showChatWindow.value = true;
- chatWindowInfo.value = info;
+ chatWindowInfo = info;
 //  personInfo.value = info;
- pcurrent.value = info.id
+ pcurrent.value = info.id;
 
- console.log(chatWindowInfo.value,"clickPerson")
+//  console.log(chatWindowInfo,"clickPerson") 
 }
 
 function personCardSort(id){
+    console.log(id)
     
     if(id !== personList.value[0].id){
         console.log(id);
@@ -112,5 +112,20 @@ function personCardSort(id){
             }
         }
     }
+    .chatRight {
+    flex: 1;
+    padding-right: 30px;
+    .showIcon {
+      position: absolute;
+      top: calc(50% - 150px); /*垂直居中 */
+      left: calc(50% - 50px); /*水平居中 */
+      .icon-snapchat {
+        width: 300px;
+        height: 300px;
+        font-size: 300px;
+        // color: rgb(28, 30, 44);
+      }
+    }
+  }
 }
 </style>

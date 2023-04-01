@@ -5,8 +5,8 @@
                 <HeadPortrait :imgUrl="friendInfo.headImg" />
             </div>
             <div class="info-detail">
-                <div class="name">{{ frinedInfo.name }}</div>
-                <div class="detail">{{ frinedInfo.detail }}</div>
+                <div class="name">{{ friendInfo.name }}</div>
+                <div class="detail">{{ friendInfo.detail }}</div>
             </div>
             <div class="other-fun">
                 <span class="iconfont icon-shipin" @click="video"> </span>
@@ -104,35 +104,60 @@
 
 <script setup>
 import HeadPortrait from "@/components/HeadPortrait.vue";
-import { defineProps,ref,toRefs,nextTick,onMounted} from "vue"
+import { defineProps,ref,toRefs,nextTick,onMounted,watch,defineEmits} from "vue"
 
 import { animation } from "@/utils/util";
+import { ElMessage } from 'element-plus';
+import {  getChatMsg } from "@/apis/index.js";
 
 
 const inputMsg = ref("");
 const chatList = ref([]);
 const chatContent = ref(null);
+const emit = defineEmits(["personCardSort"]);
+const srcImgList = ref([]);
 
 const props = defineProps({
-    frinedInfo : {
+    friendInfo : {
         type: Object,
-        default: ()=>{
-            return {}
-        },
+        default:()=>{}
     }
 })
 
-console.log(props,'props')
+const {friendInfo }= toRefs(props);
 
-const { friendInfo } = toRefs(props);
+// console.log(friendInfo,'props')
 
 onMounted(()=>{
     getFriendChatMsg();
 })
 
+//监听聊天对象的变化
+watch( 
+    friendInfo ,
+    (newVal,oldVal)=>{
+        console.log('watch监听inputVal的变化 newVal ------>', newVal);
+        console.log('watch监听inputVal的变化 oldVal ------>', oldVal);
+        getFriendChatMsg();
+    },
+    { deep: true}
+)
+
 //获取聊天记录
 function getFriendChatMsg(){
-
+    let params = {
+        friendId: friendInfo.value.id,
+    }
+    getChatMsg(params).then(res=>{
+        console.log(res);
+        chatList.value = res;
+        chatList.value.forEach((item)=>{
+            if(item.chatType == 2 && item.extend.imgType == 2){
+                srcImgList.value.push(item.msg)
+            }
+        })
+        scrollBottom();
+    })
 
 }
 
@@ -147,7 +172,14 @@ function sendText(){
             chatType: 0, //信息类型，0文字，1图片
             uid: "1001", //uid
         }
-
+        sendMsg(chatMsg);
+        emit('personCardSort', friendInfo.value.id);
+        inputMsg.value = "";
+    }else {
+        ElMessage({
+            message: "消息不能为空",
+            type: "warning"
+        })
     }
 }
 
@@ -213,7 +245,7 @@ function sendMsg(msgList){
       }
     }
   }
-  .botoom {
+  .bottom {
     width: 100%;
     height: 70vh;
     background-color: rgb(50, 54, 68);

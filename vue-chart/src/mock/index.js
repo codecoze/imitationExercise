@@ -8,11 +8,12 @@ Mock.mock(/friend\/friendList/, 'post', () => { //三个参数。第一个：路
 
 Mock.mock(/friend\/chatMsg/, 'post', (config) => {
     let params = JSON.parse(config.body)
-    if (params.frinedId == "1002")
+    let fId = params.friendId.trim();
+    if (fId == "1002")
         return chatMsg1002
-    if (params.frinedId == "1003")
+    if (fId == "1003")
         return chatMsg1003
-    if (params.frinedId == "1004")
+    if (fId == "1004")
         return chatMsg1004
 })
 
