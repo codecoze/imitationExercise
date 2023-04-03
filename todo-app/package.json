@@ -1,0 +1,22 @@
+{
+  "name": "todoApp",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.2.0",
+    "vite-plugin-html": "^3.2.0"
+  },
+  "description": "webExercise",
+  "main": "index.js",
+  "license": "MIT"
+}
