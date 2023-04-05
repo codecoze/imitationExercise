@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大文件分片上传</title>
+</head>
+<body>
+    <input type="file" onchange="selFile(event)" />
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.4/axios.min.js"></script>
+    <script>
+        //切片处理
+        function createThunk(file,size = 1024 * 1024 * 0.5){
+            //size 切片大小
+            let res = []; //文件切片的数组
+            let cur = 0;  //当前的大小
+            //file.size 表示文件的大小
+            while(cur < file.size){
+                res.push({
+                    tempFile: file.slice(cur,size);
+                })
+                cur += size;
+            }
+            return res;
+        }
+
+
+        function selFile(event) {
+            const file = event.currentTarget.files[0];
+            const fileList = createThunk(file);
+            
+            const uuid = crypto.randomUUID(); //使用uuid作为文件名
+            let uploadList = fileList.map((itenm,index)=>{
+                const formData = new  FormData(); //定义上传数据
+                formData.append("chunk",item.tempFile);
+                formData.append("name",uuid+"@"+index);
+                formData.append("filename",uuid);
+                return axios.post("/upload_file_chunk",formData);
+            })
+
+            //所有的切片都上传成功
+            Promise.all(fileList).then(res=>{
+                //所有的切片完成之后 再请求合并文件
+                axios.post("/upload_file_end", {
+                    filename: uuid, //文件名
+                    extname: file.name.split(".").slice(-1)[0], //文件的后缀
+                }).then(res=>{
+                    console.log(res.data);
+                })
+            
+            })
+
+            //监听是否所有的请求都成功，可以使用Promise.allSettled()，监听请求状态，如果有失败则重新请求。
+
+
+        }
+    </script>
+</body>
+</html>
