@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header_container {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    min-width: 1000px;
+    min-height: 155px;
+    height: 9.375vw;
+    max-height: 240px;
+    background-color: #e3e5e7;
+    background-position: center 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header_container .animated-banner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.animated-banner > .layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trans {
+    transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+}
